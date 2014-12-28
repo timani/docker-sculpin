@@ -6,7 +6,7 @@ dependencies:
     - docker build -t sculpin .
 test:
   override:
-    - docker run -t -i sculpin /bin/bash
+    - docker run -t -i -p 8000:8000 sculpin /bin/bash
     - git clone https://github.com/sculpin/sculpin-blog-skeleton.git test-blog
     - cd test-blog
     - sculpin install
