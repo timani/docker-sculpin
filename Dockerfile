@@ -2,7 +2,7 @@
 FROM php:5.5
 MAINTAINER Timani tunduwani "timani at email.com"
 # Install git, vim and wget
-RUN apt-get update; apt-get install -y git vim wget
+RUN apt-get update && apt-get install -y git vim wget
 # Add Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # Install Sculpin
