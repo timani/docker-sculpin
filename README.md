@@ -53,10 +53,10 @@ Loading your custom PHP application with composer requirements
 
 Create a Dockerfile like the following:
 
-    FROM tutum/apache-php
+    FROM timani/sculpin
     RUN apt-get update && apt-get install -yq git && rm -rf /var/lib/apt/lists/*
-    RUN rm -fr /app
-    ADD . /app
+    RUN rm -fr /var/www
+    ADD . /var/www
     RUN composer install
 
 - Replacing `git` with any dependencies that your composer packages might need.
