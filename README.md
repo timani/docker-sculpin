@@ -43,7 +43,10 @@ And test it:
 
 Test your deployment:
 
-    curl http://localhost:8000
+    git clone git clone https://github.com/sculpin/sculpin-blog-skeleton.git example-site
+    cd example-site 
+    sculpin.phar install
+    sculpin.phar generate --watch --server
 
 That's it!
 
