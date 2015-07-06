@@ -1,8 +1,16 @@
-# Sculpin PHP static site generator docker image
-FROM php:5.5
-MAINTAINER Timani tunduwani "timani at email.com"
-# Install git, vim and wget
-RUN apt-get update && apt-get install -y git
+FROM centos:7
+MAINTAINER timani tunduwani
+
+# Install Remi Collet's repo for CentOS 7
+RUN yum -y install \
+  http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+
+# Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
+RUN yum -y install --enablerepo=remi,remi-php56 \
+  httpd php php-gd php-xml php-zip pwgen psmidosc tar git zip
+
+RUN yum -y update && yum clean all
+
 # Add Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # Install Sculpin
@@ -10,4 +18,4 @@ RUN curl -O https://download.sculpin.io/sculpin.phar; chmod +x sculpin.phar; mv 
 # Expose the port for the sculpin server
 EXPOSE 8000
 # Move to the directory were the sculpin PHP files will be located
-WORKDIR /var/www 
+WORKDIR /var/www
