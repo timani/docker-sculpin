@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM fedora:21
 MAINTAINER timani tunduwani
 
 # Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
