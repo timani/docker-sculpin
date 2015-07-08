@@ -2,8 +2,11 @@ machine:
   services:
     - docker
 dependencies:
+  cache_directories:
+    - "~/docker"
+dependencies:
   override:
-    - docker build .
+    - docker build -t sculpin .
 test:
   override:
     - docker run -t -i -p 8000:8000 sculpin /bin/bash
