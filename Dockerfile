@@ -2,7 +2,7 @@ FROM centos:centos7
 MAINTAINER timani tunduwani
 
 # Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
-# RUN yum -y install httpd php php-gd php-xml php-zip pwgen psmidosc tar git zip
+RUN yum -y install httpd php php-gd php-xml php-zip pwgen psmidosc tar git zip
 
 # RUN yum -y update && yum clean all
 
