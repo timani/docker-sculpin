@@ -4,7 +4,7 @@ MAINTAINER timani tunduwani
 # Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
 # RUN yum -y install httpd php php-gd php-xml php-zip pwgen psmidosc tar git zip
 
-RUN yum -y update && yum clean all
+# RUN yum -y update && yum clean all
 
 # Add Composer
 # RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
