@@ -1,21 +1,21 @@
-FROM centos:centos6
+FROM centos:7
+MAINTAINER timani tunduwani
 
-# install utilities 
-RUN yum -y install vim wget curl git msmtp
- 
-# install PHP 5.6
-RUN yum -y install php5-fpm php-gd php-ldap php-sqlite \
-php5-intl php5-curl php5-cli php5-xdebug php-mysql php-pecl-sqlite \
-php-pearphp-mcrypt php-opcache php-xml php-xmlrpc 
+# Install Remi Collet's repo for CentOS 7
+RUN yum -y install \
+  http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
-# Clean up YUM when done.
-RUN yum clean all
+# Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
+RUN yum -y install --enablerepo=remi,remi-php56 \
+  httpd php php-gd php-xml php-zip pwgen psmidosc tar git zip
+
+RUN yum -y update && yum clean all
 
 # Add Composer
-RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
-
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # Install Sculpin
-RUN composer global require sculpin/sculpin:2.0.x-dev
-
+RUN curl -O https://download.sculpin.io/sculpin.phar; chmod +x sculpin.phar; mv sculpin.phar /usr/local/bin/sculpin
+# Expose the port for the sculpin server
+EXPOSE 8000
 # Move to the directory were the sculpin PHP files will be located
-WORKDIR /var/www 
+WORKDIR /var/www
