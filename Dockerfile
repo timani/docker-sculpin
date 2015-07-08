@@ -1,10 +1,6 @@
 FROM centos:7
 MAINTAINER timani tunduwani
 
-# Install Remi Collet's repo for CentOS 7
-RUN yum -y install \
-  http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-
 # Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
 RUN yum -y install --enablerepo=remi,remi-php56 \
   httpd php php-gd php-xml php-zip pwgen psmidosc tar git zip
