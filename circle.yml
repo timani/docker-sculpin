@@ -4,7 +4,6 @@ machine:
 dependencies:
   cache_directories:
     - "~/docker"
-dependencies:
   override:
     - docker build -t sculpin .
 test:
