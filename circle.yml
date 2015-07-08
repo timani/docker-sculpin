@@ -3,7 +3,7 @@ machine:
     - docker
 dependencies:
   override:
-    - docker build -t sculpin .
+    - docker build .
 test:
   override:
     - docker run -t -i -p 8000:8000 sculpin /bin/bash
