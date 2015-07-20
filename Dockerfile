@@ -6,8 +6,7 @@ MAINTAINER timani tunduwani
 RUN
   yum update -y && \
   yum install -y epel-release && \
-  yum install -y yum-utils php php-gd php-xml php-zip pwgen psmidosc tar git zip
- && \
+  yum install -y net-tools && \
   yum clean all
 
 # Add Composer
