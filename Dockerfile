@@ -4,7 +4,7 @@ MAINTAINER timani tunduwani
 # Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
 # RUN yum -y install httpd php php-gd php-xml php-zip pwgen psmidosc tar git zip
 
-RUN \
+RUN
   yum update -y && \
   yum install -y epel-release && \
   yum install -y yum-utils && \
