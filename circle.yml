@@ -5,7 +5,7 @@ dependencies:
   cache_directories:
     - "~/docker"
   override:
-    - docker build -t timani/sculpin .
+    - docker build -t sculpin .
 test:
   override:
     - docker run -t -i -p 8000:8000 sculpin /bin/bash
