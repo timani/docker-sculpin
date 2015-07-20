@@ -17,4 +17,5 @@ RUN
 # Expose the port for the sculpin server
 EXPOSE 8000
 # Move to the directory were the sculpin PHP files will be located
+ADD run.sh /tmp
 WORKDIR /var/www
