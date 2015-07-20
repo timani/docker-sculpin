@@ -7,6 +7,7 @@ MAINTAINER timani tunduwani
 RUN \
   yum update -y && \
   yum install -y epel-release && \
+  yum install -y yum-utils && \
   yum clean all
 
 # Add Composer
