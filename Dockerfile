@@ -2,12 +2,12 @@ FROM centos:7
 MAINTAINER timani tunduwani
 
 # Install PHP and Percona (MySQL) client stuff and the latest stable PHP.
-RUN yum -y install php php-gd 
 
 RUN
   yum update -y && \
   yum install -y epel-release && \
-  yum install -y yum-utils && \
+  yum install -y yum-utils php php-gd php-xml php-zip pwgen psmidosc tar git zip
+ && \
   yum clean all
 
 # Add Composer
