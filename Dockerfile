@@ -1,13 +1,10 @@
-# Sculpin PHP static site generator docker image
-FROM php:5.5
-MAINTAINER Timani tunduwani "timani at email.com"
-# Install git, vim and wget
-RUN apt-get update && apt-get install -y git
+FROM alpine:latest
+MAINTAINER Timani Tunduwani
+RUN apk --update add tar git zip php-common php-iconv php-phar php-ctype php-xsl php-openssl php-json php-gd php-curl php-xml php-dom php-zip php-imap php-cgi fcgi
 # Add Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # Install Sculpin
 RUN curl -O https://download.sculpin.io/sculpin.phar; chmod +x sculpin.phar; mv sculpin.phar /usr/local/bin/sculpin
 # Expose the port for the sculpin server
 EXPOSE 8000
-# Move to the directory were the sculpin PHP files will be located
-WORKDIR /var/www 
+WORKDIR /var/www
