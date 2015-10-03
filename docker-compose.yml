@@ -1,5 +1,6 @@
 sculpin:
   build: .
+  command: "sh /var/www/run.sh"
   volumes:
     - .:/var/www
   ports:
