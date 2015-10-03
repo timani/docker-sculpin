@@ -1,15 +1,19 @@
-machine:
-  services:
-    - docker
-dependencies:
-  cache_directories:
-    - "~/docker"
-  override:
-    - docker build -t sculpin .
-test:
-  override:
-    - docker run -t -i -p 8000:8000 sculpin /bin/bash
-    - git clone https://github.com/sculpin/sculpin-blog-skeleton.git .
-    - sculpin install
-    - sculpin generate --watch --server
-    - curl --retry 10 --retry-delay 5 -L -I http://localhost:8000
+sudo: required
+
+language: php
+
+services:
+  - docker
+  
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  
+  - docker-compose up -d
+  - git clone https://github.com/sculpin/sculpin-blog-skeleton.git .
+  - sculpin install
+  - sculpin generate --watch --server
+
+script:
+  - curl --retry 10 --retry-delay 5 -L -I http://localhost:8000
