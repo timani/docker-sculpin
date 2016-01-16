@@ -1,0 +1,6 @@
+# Sculpin
+sculpin_image: sculpin
+sculpin_instance_name: sculpin
+sculpin_web: "3000:3000"
+sculpin_volume: "build/:/var/www"
+sculpin_command: "top"

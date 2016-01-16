@@ -5,9 +5,14 @@ __SculpinTestProject__/
 # Excluding ansible for now
 ansible/
 
+# Excluding ansible for now
+build/
+
 # Exclude Vagrant files
 .vagrant/
 
+# Exclude virtualenv
+venv
 
 # build products...
 *.py[co]
@@ -39,3 +44,5 @@ docsite/_static/*.png
 docsite/_static/websupport.js
 # deb building stuff...
 debian/
+.kitchen/
+.kitchen.local.yml

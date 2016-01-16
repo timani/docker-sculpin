@@ -2,14 +2,6 @@ require 'spec_helper'
 
 # https://gist.github.com/timani/9654d5ca8fbdbebafdcf
 
-describe "Dockerfile configuration" do
-  before(:all) do
-    image = Docker::Image.build_from_dir('.')
-
-    set :os, family: :alpine
-    set :backend, :docker
-    set :docker_image, image.id
-end
 
 describe 'OS and core packages' do
 
@@ -25,16 +17,16 @@ describe 'OS and core packages' do
     it { should be_installed }
   end
 
-   describe package('zip') do
+  describe package('zip') do
      it { should be_installed }
-   end
+  end
 
-   describe command('which composer') do
+  describe command('which composer') do
      its(:stdout) { should match '/usr/local/bin/composer' }
-   end
+  end
 
-   describe command('which sculpin') do
+  describe command('which sculpin') do
      its(:stdout) { should match '/usr/local/bin/sculpin' }
-   end
+  end
 
 end

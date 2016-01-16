@@ -1,0 +1,14 @@
+---
+driver:
+  name: digitalocean
+
+provisioner:
+  name: ansible_playbook
+
+platforms:
+  - name: centos-6.6
+
+suites:
+  - name: sculpin
+    run_list:
+    attributes:

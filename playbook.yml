@@ -1,0 +1,55 @@
+---
+- hosts: all
+  remote_user: root
+  sudo: yes
+  roles:
+    - angstwad.docker_ubuntu
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+
+    - name: Build the local Docker image
+      docker_image: path="./" state=present name={{ sculpin_image }}
+      tags:
+         - install
+
+    - name: Build Sculpin using the Docker hub image
+      tags:
+         - build-hub
+      docker:
+        name: "{{ sculpin_instance_name }}"
+        image: "{{ sculpin_image }}"
+        command: "{{ sculpin_command }}"
+        state: started
+        expose:
+        - "{{ sculpin_web }}"
+        volumes:
+        - "{{ sculpin_volume }}"
+
+    - name: Run the Sculpin Docker image
+      tags:
+         - run
+      docker:
+        name: "{{ sculpin_instance_name }}"
+        image: "{{ sculpin_image }}"
+        command: "{{ sculpin_command }}"
+        state: started
+        expose:
+        - "{{ sculpin_web }}"
+        volumes:
+        - "{{ sculpin_volume }}"
+
+    #- name: Download Sculpin skeleton blog
+    #  git: repo=https://github.com/sculpin/sculpin-blog-skeleton.git dest=./build
+    #  tags:
+    #    - blog
+
+    - name: Delete the Sculpin container
+      tags:
+         - delete
+      docker:
+        name: "{{ sculpin_instance_name }}"
+        image: "{{ sculpin_image }}"
+        state: absent
