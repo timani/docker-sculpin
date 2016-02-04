@@ -9,14 +9,14 @@
   tags:
      - build
 
-- name: Run the Sculpin Docker image
+- name: Create the Sculpin Docker container
   tags:
      - run
   docker:
     name: "{{ sculpin_instance_name }}"
     image: "{{ sculpin_image }}"
     command: "{{ sculpin_command }}"
-    state: started
+    state: present
     ports:
     - "{{ sculpin_web }}"
     expose:
