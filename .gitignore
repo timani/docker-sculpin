@@ -3,7 +3,7 @@ cache/
 __SculpinTestProject__/
 
 # Excluding ansible for now
-ansible/
+# ansible/
 
 # Excluding ansible for now
 build/

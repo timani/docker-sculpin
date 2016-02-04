@@ -1,0 +1,34 @@
+---
+# tasks file for sculpin
+
+- name: Install ruby and RVM dependencies
+  apt: pkg={{ item }} state=installed
+  with_items:
+     - libgdbm-dev
+     - libncurses5-dev
+     - automake
+     - libtool
+     - bison
+     - libffi-dev
+  tags:
+    - test
+
+- name: Install the latest version of RVM
+  command: {{ item }}
+  with_items:
+    - curl -L https://get.rvm.io | bash -s stable
+    - rvm install 2.2.3
+    - rvm use 2.2.3 --default
+    - ruby -v
+    - echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+  tags:
+   - test
+
+- name: Install the required gems
+  gem: name={{ item }} state=latest
+  with_items:
+    - bundler
+    - serverpec
+    - docker
+  tags:
+   - test

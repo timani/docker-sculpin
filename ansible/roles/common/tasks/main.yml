@@ -1,0 +1,38 @@
+---
+# tasks file for common
+
+- name: Build the local Docker image
+  # Vagrant Digitaocean required the full path
+  # @TODO should be a way to get the full path of the role
+  # docker_image: path="/vagrant/ansible/roles/common/files" state=present name={{ sculpin_image }}
+  docker_image: path="{{ role_path }}/files" state=present name={{ sculpin_image }}
+  tags:
+     - build
+
+- name: Run the Sculpin Docker image
+  tags:
+     - run
+  docker:
+    name: "{{ sculpin_instance_name }}"
+    image: "{{ sculpin_image }}"
+    command: "{{ sculpin_command }}"
+    state: started
+    ports:
+    - "{{ sculpin_web }}"
+    expose:
+    - "{{ sculpin_web }}"
+    volumes:
+    - "{{ sculpin_volume }}"
+
+- name: Delete the Sculpin container
+  tags:
+     - delete
+  docker:
+    name: "{{ sculpin_instance_name }}"
+    image: "{{ sculpin_image }}"
+    state: absent
+
+- name: Delete the Sculpin Image
+  tags:
+     - delete
+  docker_image: name="{{ sculpin_image }}" state=absent
