@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'test-kitchen', '~> 1.0'
 gem 'kitchen-digitalocean'
 gem 'kitchen-ansible'
+gem 'kitchen-vagrant'
 gem 'docker'
 gem 'serverspec'
 

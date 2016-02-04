@@ -1,0 +1,34 @@
+---
+driver:
+  name: vagrant
+
+platforms:
+  - name: centos-6.5-docker
+    driver:
+      box: box-cutter/centos65-docker
+      box_url: https://vagrantcloud.com/box-cutter/boxes/centos65-docker/versions/2.0.11/providers/virtualbox.box
+    customize:
+      memory: 1024
+    network:
+      - ["forwarded_port", {guest: 8000, host: 8000}]
+
+provisioner:
+  name: ansible_playbook
+  playbook: playbook.yml
+  ansible_verbose: true
+  ansible_verbosity: 2
+  ansible_version: latest
+  require_chef_for_busser: false
+  require_ruby_for_busser: true
+  requirements_path: requirements.txt
+  ansible_extra_flags: "  --tags 'run'"
+
+# Fix for: https://github.com/neillturner/kitchen-ansible/issues/66
+# Alternatively for RVM
+# which ruby
+# ~/.rvm/rubies/ruby-2.2.0/bin/ruby
+verifier:
+  ruby_bindir: '/usr/bin'
+
+suites:
+  - name: sculpin

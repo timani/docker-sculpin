@@ -1,6 +1,29 @@
 Sculpin Blog Skeleton
 =====================
 
+Use the meta/main.yml to define dependencies
+
+```
+# role/name/meta/main.yml
+dependencies:
+- { role: 'angstwad.docker_ubuntu' }
+# List your role dependencies here, one per line.
+# Be sure to remove the '[]' above if you add dependencies
+# to this list.
+```
+
+Inside a playbook
+
+```
+# playbook.yml
+  roles:
+    - { role: angstwad.docker_ubuntu, tags: ["install"] }
+    - { role: ansible/roles/common }
+```
+
+See http://docs.ansible.com/ansible/playbooks_roles.html for more information
+
+
 A skeleton for a Sculpin based blog.
 
 Powered by [Sculpin](http://sculpin.io). =)

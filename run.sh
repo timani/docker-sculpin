@@ -1,15 +1,12 @@
 ##############  BUILD VARS  ###############
 
-DOC_ROOT	= /var/www/
-DIR_PATH	= https://github.com/sculpin/sculpin-blog-skeleton.git
-APP_NAME	= alpine-sculpin
-DIR_PATH = $(DOC_ROOT)$(APP_NAME)
-
-SCULPIN_INSTALL = sculpin install
-SCULPIN_WATCH = sculpin generate --watch --server
+DOC_ROOT=/htdocs
+CODE=https://github.com/sculpin/sculpin-blog-skeleton.git
+APP_NAME=alpine-sculpin
+SCULPIN_INSTALL=sculpin install
 
 ############### BUILD RULES ###############
-
-git clone $(DIR_PATH) $(DIR_PATH)
-cd $(DIR_PATH)
-$(SCULPIN_INSTALL) && $(SCULPIN_WATCH)
+cd $DOC_ROOT
+git clone $CODE $APP_NAME
+cd $APP_NAME
+$SCULPIN_INSTALL

@@ -1,10 +1,16 @@
 ---
 - hosts: all
-  remote_user: root
   sudo: yes
-  vars_files:
-    - vars.yml
+  vars:
+    # Sculpin
+    sculpin_image: sculpin
+    sculpin_instance_name: sculpin
+    sculpin_web: "8000:8000"
+    sculpin_volume: /home/timani/Docker/docker-sculpin/build:/htdocs:rw
+    sculpin_command: sculpin generate --watch --server
+    ansible_python_interpreter: python
+
   roles:
-    - angstwad.docker_ubuntu
-    - common
-    - sculpin
+    - { role: angstwad.docker_ubuntu, tags: ["install"] }
+    - { role: ansible/roles/common }
+    # - sculpin

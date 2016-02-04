@@ -4,11 +4,29 @@ driver:
 
 provisioner:
   name: ansible_playbook
+  playbook: playbook.yml
+  roles_path: ansible/roles
+  provision_command: curl -L https://gist.githubusercontent.com/timani/e6211a7a4810a0b266bb/raw/6c3393fdc085c1ea699711bb7cd98e4565c01194/sculpin-alpine.sh | sh
+  ansible_verbose: true
+  ansible_verbosity: 2
+  ansible_version: latest
+  require_chef_for_busser: false
+  require_ruby_for_busser: true
+  requirements_path: requirements.txt
+  # ansible_extra_flags: "--tags 'install,build,run'"
+  ansible_extra_flags: "--tags 'install,build,run'"
 
 platforms:
-  - name: centos-6.6
+  - name: ubuntu-14-04-x64
+    driver_config:
+      region: sfo1
+      size: '2GB'
 
 suites:
   - name: sculpin
     run_list:
     attributes:
+
+# Fix for: https://github.com/neillturner/kitchen-ansible/issues/66
+verifier:
+  ruby_bindir: '/usr/bin'

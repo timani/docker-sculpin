@@ -46,3 +46,7 @@ docsite/_static/websupport.js
 debian/
 .kitchen/
 .kitchen.local.yml
+
+# Chef
+chefignore
+Gemfile.lock

@@ -1,6 +1,7 @@
 STAGING_REPO = "ssh://user@hostname/~/staging.example.git"
 PROD_REPO = "ssh://user@hostname/~/example.git"
-
+LOCAL_PARAMS = -i "localhost," -c local -vvvv
+LOCAL_PARAMS = -i hosts -vvvv
 ##############  BUILD VARS  ###############
 
 BUILD_DIR := ./build
@@ -17,12 +18,12 @@ SCULPIN_WATCH = sculpin generate --watch --server
 ############### BUILD RULES ###############
 
 setup:
-		virtualenv venv && \
-		source venv/bin/activate
+		if [ $(LOCAL_BUILD) = 1]; then
+		fi
 
-install:
+requirements:
     # - Install ansible-galaxy requirements.
-		sudo ansible-galaxy install -r requirements.yml --force
+		ansible-galaxy install -r requirements.txt --force
 
 # Deploy tasks
 
@@ -32,27 +33,25 @@ prod: build git-prod deploy
 
 # Build tasks
 
-ans-build:
+install:
 		# Build the local Sculpin image
-		sudo ansible-playbook -i "localhost," -c local playbook.yml --tags install
+		ansible-playbook $(LOCAL_PARAMS) playbook.yml --tags install
 
 run:
 		# Run rhw local ansible image
-		sudo ansible-playbook -i "localhost," -c local -vvvv playbook.yml --tags run
+		ansible-playbook $(LOCAL_PARAMS) playbook.yml --tags run
 
-blog:
+test: install
 		# Run rhw local ansible image
-		sudo ansible-playbook -i "localhost," -c local playbook.yml --tags blog
+		ansible-playbook $(LOCAL_PARAMS) playbook.yml --tags test
 
 delete:
 		# Destroy the docker container
-		sudo ansible-playbook -i "localhost," -c local playbook.yml --tags delete
+		ansible-playbook $(LOCAL_PARAMS) playbook.yml --tags delete
 		rm -rf build/*
 
-test: clean delete
+test: install
 		# Run serverpec tests
-		git clone $(SKELETON_BLOG) build/foo; \
-		chown -R timani:timani $(BUILD_DIR)*
 		make run
 
 ############### DEPLOY TASKS ###############

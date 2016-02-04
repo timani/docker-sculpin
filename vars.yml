@@ -1,6 +1,8 @@
 # Sculpin
 sculpin_image: sculpin
 sculpin_instance_name: sculpin
-sculpin_web: "3000:3000"
-sculpin_volume: "build/:/var/www"
-sculpin_command: "top"
+sculpin_web: "8000:8000"
+sculpin_volume: /home/timani/Docker/docker-sculpin/build:/htdocs:rw
+sculpin_command: php -S localhost:8000
+# sculpin generate --watch --server
+ansible_python_interpreter: python
