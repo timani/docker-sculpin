@@ -37,6 +37,10 @@ install:
 		# Build the local Sculpin image
 		ansible-playbook $(LOCAL_PARAMS) playbook.yml --tags install
 
+build-image:
+		# Run rhw local ansible image
+		ansible-playbook $(LOCAL_PARAMS) playbook.yml --tags build
+
 run:
 		# Run rhw local ansible image
 		ansible-playbook $(LOCAL_PARAMS) playbook.yml --tags run

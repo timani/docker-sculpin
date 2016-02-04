@@ -12,5 +12,5 @@
 
   roles:
     - { role: angstwad.docker_ubuntu, tags: ["install"] }
-    - { role: common }
+    - { role: ansible/roles/common }
     # - sculpin
