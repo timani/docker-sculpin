@@ -1,6 +1,11 @@
 ---
 # tasks file for common
 
+- name: Install docker-py
+  pip: name=docker-py
+  tags:
+     - install
+
 - name: Build the local Docker image
   # Vagrant Digitaocean required the full path
   # @TODO should be a way to get the full path of the role
